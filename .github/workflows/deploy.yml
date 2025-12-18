@@ -18,21 +18,27 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'  # Adjust to the version your project needs
+          node-version: '18'  # Adjust to your project's Node.js version
 
-      # Step 3: Install dependencies
-      - name: Install dependencies
-        run: npm ci  # Using npm ci to ensure a clean install and prevent issues with node_modules
+      # Step 3: Remove node_modules and package-lock.json if they exist
+      - name: Remove node_modules and package-lock.json
+        run: |
+          rm -rf node_modules
+          rm -f package-lock.json
 
-      # Step 4: Build the app using Vite
+      # Step 4: Install dependencies and regenerate package-lock.json
+      - name: Install dependencies and regenerate lock file
+        run: npm install
+
+      # Step 5: Build the app using Vite
       - name: Build the app
         run: npm run build
 
-      # Step 5: Deploy to GitHub Pages
+      # Step 6: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.2
         with:
           branch: gh-pages    # The branch to deploy to
-          folder: dist        # Vite output folder (not 'build')
+          folder: dist        # Vite output folder
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
