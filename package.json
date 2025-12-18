@@ -18,6 +18,9 @@
     "@tailwindcss/vite": "^4.1.4",
     "@types/three": "^0.176.0",
     "gsap": "^3.12.7",
+     "autoprefixer": "^10.4.7",  // Ensure Autoprefixer is added to the dev dependencies
+  "tailwindcss": "^3.1.6",
+  "vite": "^7.3.0",
     "motion": "^12.9.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
